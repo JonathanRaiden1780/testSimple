@@ -1,0 +1,17 @@
+.simple-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .welcome-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .current-date {
+    font-size: 1rem;
+    color: #555;
+  }

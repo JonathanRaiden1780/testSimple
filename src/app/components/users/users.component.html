@@ -1,0 +1,61 @@
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Usuarios</h1>
+          <button style="float: right;" (click)="openModal()" class="btn btn-primary">Agregar Usuario</button>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Edad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.age }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<div *ngIf="isModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div >
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" formControlName="name">
+          <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+            <small *ngIf="userForm.get('name')?.errors?.['required']">Nombre es requerido.</small>
+            <small *ngIf="userForm.get('name')?.errors?.['maxlength']">Máximo 50 caracteres.</small>
+            <small *ngIf="userForm.get('name')?.errors?.['minlength']">Minimo 3 caracteres.</small>
+          </div>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" formControlName="email">
+          <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+            <small *ngIf="userForm.get('email')?.errors?.['required']">Email es requerido.</small>
+            <small *ngIf="userForm.get('email')?.errors?.['email']">Formato de email incorrecto.</small>
+          </div>
+        </div>
+        <div>
+          <label for="age">Edad:</label>
+          <input type="number" id="age" formControlName="age">
+          <div *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched">
+            <small *ngIf="userForm.get('age')?.errors?.['required']">Edad es requerida.</small>
+            <small *ngIf="userForm.get('age')?.errors?.['min']">Edad mínima es 1.</small>
+            <small *ngIf="userForm.get('age')?.errors?.['max']">Edad máxima es 100.</small>
+          </div>
+        </div>
+        <button type="submit" [hidden]="userForm.invalid">Registrar</button>
+      </form>
+    </div>
+  </div>
